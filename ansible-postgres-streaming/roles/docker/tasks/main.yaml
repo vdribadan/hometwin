@@ -1,0 +1,19 @@
+---
+
+   - name: Install Docker
+     shell: curl -fsSL https://get.docker.com/ | sh
+
+   - name: Add docker group for centos user
+     user: name=centos groups=docker append=yes
+
+   - name: Reload Docker daemon
+     command: systemctl daemon-reload
+
+   - name: Restart docker service
+     service: name=docker state=restarted
+
+   - name: Enable Docker Service
+     command: systemctl enable docker
+
+   - name:  Deploy and start web app containers
+     command: /vagrant/dockerfiles/webctl.sh deploy
