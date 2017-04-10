@@ -1,0 +1,4 @@
+buildroot: /vagrant/dockerfiles
+tomcatdir: tomcat
+nginxdir: nginx
+haproxydir: haproxy

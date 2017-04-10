@@ -8,7 +8,7 @@ Vagrant.configure(2) do |config|
     central_config.vm.box_url = "https://atlas.hashicorp.com/vdribadan/boxes/centos7/versions/0.0.1/providers/virtualbox.box"
     central_config.vm.network "private_network", :ip => '10.10.10.3'
   config.vm.provision "ansible_local" do |ansible|
-    ansible.playbook = "playbook_central.yml"
+    ansible.playbook = "site.yml"
     ansible.verbose = true
   end
   end
@@ -19,7 +19,7 @@ Vagrant.configure(2) do |config|
     worker_config.vm.box_url = "https://atlas.hashicorp.com/vdribadan/boxes/centos7/versions/0.0.1/providers/virtualbox.box"
     worker_config.vm.network "private_network", :ip => '10.10.10.2'
   config.vm.provision "ansible_local" do |ansible|
-    ansible.playbook = "playbook_worker.yml"
+    ansible.playbook = "site.yml"
     ansible.verbose = true
   end
   end 

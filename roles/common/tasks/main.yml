@@ -4,7 +4,7 @@
 
 - name: Ensure packages are installed
   yum: name={{ item }}
-  with_items: pg_packages
+  with_items: "{{ pg_packages }}"
 
 - name: Update Packages
   yum: name=* state=latest

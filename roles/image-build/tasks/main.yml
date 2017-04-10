@@ -1,0 +1,15 @@
+---
+  - name: Build tomcat image
+    docker_image:
+     path: "{{ buildroot }}/{{ tomcatdir }}"
+     name: twino/tomcat
+
+  - name: Build tomcat image
+    docker_image:
+     path: "{{ buildroot }}/{{ nginxdir }}"
+     name: twino/nginx
+
+  - name: Build tomcat image
+    docker_image:
+     path: "{{ buildroot }}/{{ haproxydir }}"
+     name: twino/haproxy

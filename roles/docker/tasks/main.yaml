@@ -15,5 +15,9 @@
    - name: Enable Docker Service
      command: systemctl enable docker
 
-   - name:  Deploy and start web app containers
-     command: /vagrant/dockerfiles/webctl.sh deploy
+   - name: Install pip
+     yum: name=python-pip state=latest
+
+   - name: Install docker-py
+     pip: name=docker 
+     
