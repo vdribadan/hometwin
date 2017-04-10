@@ -1,0 +1,10 @@
+
+- name: Install pgdg94 yum repo
+  yum: name=http://yum.postgresql.org/9.4/redhat/rhel-7.2-x86_64/pgdg-centos94-9.4-2.noarch.rpm state=present
+
+- name: Ensure packages are installed
+  yum: name={{ item }}
+  with_items: pg_packages
+
+- name: Update Packages
+  yum: name=* state=latest

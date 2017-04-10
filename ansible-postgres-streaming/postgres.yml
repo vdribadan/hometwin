@@ -1,0 +1,20 @@
+---
+- hosts: all
+  become: true
+  gather_facts: yes
+  roles:
+    - common
+
+- hosts: central
+  gather_facts: yes
+  become: yes
+  become_user: postgres
+  roles:
+    - central
+
+- hosts: slave
+  gather_facts: yes
+  become: yes
+  become_user: postgres
+  roles:
+    - slave

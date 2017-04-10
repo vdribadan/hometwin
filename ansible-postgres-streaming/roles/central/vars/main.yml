@@ -1,0 +1,7 @@
+dbuser: twino
+dbname: twino
+dbpath: /var/lib/pgsql/9.4/data
+pw: twino
+repl_pw: twinorepl
+initdb:
+  "7": /usr/pgsql-9.4/bin/postgresql94-setup initdb

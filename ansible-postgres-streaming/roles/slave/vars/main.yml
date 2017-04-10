@@ -1,0 +1,5 @@
+dbpath: /var/lib/pgsql/9.4/data
+dbuser: twino
+dbname: twino
+pw: twino
+repl_pw: twinorepl

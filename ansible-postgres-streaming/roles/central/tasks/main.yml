@@ -1,0 +1,40 @@
+- name: initdb
+  command: "/usr/pgsql-9.4/bin/postgresql94-setup initdb creates={{ dbpath }}/PG_VERSION"
+  become: true
+  become_user: root
+
+- name: Template postgres.conf and pg_hba.conf
+  template:
+    src: '{{ item }}.conf.j2'
+    dest: '{{ dbpath }}/{{item }}.conf'
+  with_items:
+    - postgresql
+    - pg_hba
+  register: pg_config
+
+- name: Ensure pgsql service is started
+  become: yes
+  become_user: root
+  service:
+    name: postgresql-9.4
+    state: restarted
+    enabled: true
+  when: pg_config|changed
+
+- name: Ensure DB user exists
+  postgresql_user:
+    name: "{{ dbuser }}"
+    role_attr_flags: "LOGIN,SELECT,CREATE"
+    password: '{{ pw }}'
+  no_log: true
+
+- name: Ensure replication user exists
+  postgresql_user:
+    name: repl
+    role_attr_flags: "LOGIN,REPLICATION"
+    password: "{{ repl_pw }}"
+
+- name: Ensure Twino DB exists
+  postgresql_db:
+    name: "{{ dbname }}"
+    owner: "{{ dbuser }}"

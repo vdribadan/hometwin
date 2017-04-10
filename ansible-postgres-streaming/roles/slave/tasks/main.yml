@@ -1,0 +1,41 @@
+- name: (SSSSSH)
+  copy:
+    dest: '/var/lib/pgsql/.pgpass'
+    content: "{{ hostvars[groups['central'][0]]['ansible_eth0']['ipv4']['address'] }}:5432:replication:repl:{{ repl_pw }}"
+    mode: 0600
+
+- name: Check for recovery.conf
+  stat:
+    path: "{{ dbpath }}/recovery.conf"
+  register: recovery
+
+- name: Stop Postgres
+  service:
+    name: postgresql-9.4
+    state: stopped
+  when: 'not recovery.stat.exists'
+
+- name: Empty out data directory
+  file:
+    path: '{{ dbpath }}'
+    state: absent
+  when: 'not recovery.stat.exists'
+
+- name: Copy init DBs from master
+  command: pg_basebackup -h {{ hostvars[groups['central'][0]]['ansible_eth0']['ipv4']['address'] }} -D {{ dbpath }} -U repl -X stream
+           creates={{ dbpath }}/PG_VERSION
+  when: 'not recovery.stat.exists'
+
+- name: Template postgres.conf and pg_hba.conf
+  template:
+    src: '{{ item }}.conf.j2'
+    dest: '{{ dbpath }}/{{item }}.conf'
+  with_items:
+    - postgresql
+    - pg_hba
+    - recovery
+
+- name: Ensure pgsql service is started
+  become: yes
+  become_user: root
+  service: name=postgresql-9.4 state=started enabled=true

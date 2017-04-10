@@ -1,0 +1,8 @@
+dbuser: twino
+dbname: twino
+dbpath: /var/lib/pgsql/9.4/data
+
+pg_packages:
+  - libselinux-python
+  - postgresql94-server
+  - python-psycopg2
