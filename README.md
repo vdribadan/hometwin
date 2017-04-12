@@ -42,12 +42,12 @@ Checks
 --------------------
 
 **WebApp**
-: Open your browser and type 10.10.10.3 (or https://10.10.10.3). Add self-signed certificate security exception and you should see the following on your screen:
+ Open your browser and type 10.10.10.3 (or https://10.10.10.3). Add self-signed certificate security exception and you should see the following on your screen:
 
-    **Hello World!**
+    Hello World!
     Your IP Address is: 10.10.10.1 
-: 10.10.10.1 is your NAT IP, which you are using to connect to virtual machine from your host
-: Scheme of the request: ```Your request -> Haproxy (rewrites http to https) -> Nginx (terminates TLS) -> Tomcat (knows it's being proxied from port 443)```
+ 10.10.10.1 is your NAT IP, which you are using to connect to virtual machine from your host
+ Scheme of the request: ```Your request -> Haproxy (rewrites http to https) -> Nginx (terminates TLS) -> Tomcat (knows it's being proxied from port 443)```
 
 **Postgres**
 : Ssh to central instance and try to login to database as user *twino* using password *twino*
@@ -55,25 +55,25 @@ Checks
     vagrant ssh central
     sudo -u postgres psql -h 10.10.10.3 -d twino -U twino
  
- : Try to list users, databases etc.
+  Try to list users, databases etc.
  
 
     \du
     \l
  
- : Create new table:
+  Create new table:
         
   
 
     CREATE TABLE COMPANY(ID INT PRIMARY KEY NOT NULL, NAME TEXT NOT NULL, AGE INT NOT NULL, ADDRESS  CHAR(50), SALARY  REAL);
     
- : Login to database on **worker** host to check if our table was replicated there:
+  Login to database on **worker** host to check if our table was replicated there:
  
 
     vagrant ssh worker
     sudo -u postgres psql -h 10.10.10.2 -d twino -U twino
     \d company
 
-: If you're able to see table description, then replication is working.
+ If you're able to see table description, then replication is working.
     
 Enjoy using this setup at will.
