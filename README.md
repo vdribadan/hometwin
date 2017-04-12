@@ -18,6 +18,8 @@ System requirements
 Usage
 -------------------
 
+    git clone https://github.com/vdribadan/hometwin.git
+    cd hometwin/
     vagrant up
     
 ----------
