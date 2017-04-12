@@ -1,33 +1,38 @@
 ---
-  - name: Start tomcat container
-    docker_container:
-      name: tomcat
-      image: twino/tomcat
-      state: started
+  - name: Build and run webapp containers
+    become: yes
+    become_user: vagrant
+    shell: /vagrant/dockerfiles/webctl.sh deploy
 
-  - name: Start nginx1 container
-    docker_container:
-      name: nginx1
-      image: twino/nginx
-      state: started
-      links:
-        - "tomcat:tomcat"
+#  - name: Start tomcat container
+#    docker_container:
+#      name: tomcat
+#      image: twino/tomcat
+#      state: started
 
-  - name: Start nginx2 container
-    docker_container:
-      name: nginx2
-      image: twino/nginx
-      state: started
-      links:
-        - "tomcat:tomcat"
+#  - name: Start nginx1 container
+#    docker_container:
+#      name: nginx1
+#      image: twino/nginx
+#      state: started
+#      links:
+#        - "tomcat:tomcat"
 
-  - name: Start haproxy container
-    docker_container:
-      name: haproxy
-      image: twino/haproxy
-      state: started
-      links:
-        - "nginx1:nginx1"
-        - "nginx2:nginx2"
-      ports:
-      - "80:80,443:443"
+#  - name: Start nginx2 container
+#    docker_container:
+#      name: nginx2
+#      image: twino/nginx
+#      state: started
+#      links:
+#        - "tomcat:tomcat"
+
+#  - name: Start haproxy container
+#    docker_container:
+#      name: haproxy
+#      image: twino/haproxy
+#      state: started
+#      links:
+#        - "nginx1:nginx1"
+#        - "nginx2:nginx2"
+#      ports:
+#      - "80:80,443:443"

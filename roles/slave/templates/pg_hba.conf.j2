@@ -2,5 +2,5 @@ local   all             all                                     peer
 host    all             all             127.0.0.1/32            ident
 host    all             all             ::1/128                 ident
 local postgres postgres peer
-host {{ dbname }} {{ dbuser }} {{ ansible_eth0['ipv4']['network'] }}/32 md5
-host  replication  repl  {{ hostvars[groups['central'][0]]['ansible_eth0']['ipv4']['address'] }}/32   md5
+host {{ dbname }} {{ dbuser }} {{ ansible_enp0s8['ipv4']['address'] }}/32 md5
+host  replication  repl  10.10.10.3/32   md5

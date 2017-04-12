@@ -1,4 +1,4 @@
-listen_addresses = '{{ ansible_default_ipv4.address }}'
+listen_addresses = '{{ ansible_enp0s8['ipv4']['address'] }}'
 port = 5432
 max_connections = 100
 shared_buffers = 128MB

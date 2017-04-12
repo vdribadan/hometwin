@@ -24,7 +24,7 @@
 - name: Ensure DB user exists
   postgresql_user:
     name: "{{ dbuser }}"
-    role_attr_flags: "LOGIN,SELECT,CREATE"
+    role_attr_flags: "LOGIN,CREATE"
     password: '{{ pw }}'
   no_log: true
 

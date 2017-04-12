@@ -1,7 +1,7 @@
-- name: (SSSSSH)
+- name: Setup Auth
   copy:
     dest: '/var/lib/pgsql/.pgpass'
-    content: "{{ hostvars[groups['central'][0]]['ansible_eth0']['ipv4']['address'] }}:5432:replication:repl:{{ repl_pw }}"
+    content: "10.10.10.3:5432:replication:repl:{{ repl_pw }}"
     mode: 0600
 
 - name: Check for recovery.conf
@@ -22,7 +22,7 @@
   when: 'not recovery.stat.exists'
 
 - name: Copy init DBs from master
-  command: pg_basebackup -h {{ hostvars[groups['central'][0]]['ansible_eth0']['ipv4']['address'] }} -D {{ dbpath }} -U repl -X stream
+  command: pg_basebackup -h 10.10.10.3 -D {{ dbpath }} -U repl -X stream
            creates={{ dbpath }}/PG_VERSION
   when: 'not recovery.stat.exists'
 

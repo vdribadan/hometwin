@@ -4,7 +4,12 @@ set -e
 
 #Build images
 
+builddir=/vagrant/dockerfiles
+
 build(){
+
+cd $builddir
+
 for dir in tomcat nginx haproxy; do
  cd $dir && docker build -t twino/$dir .
   cd ../

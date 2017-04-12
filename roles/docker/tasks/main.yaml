@@ -3,21 +3,11 @@
    - name: Install Docker
      shell: curl -fsSL https://get.docker.com/ | sh
 
-   - name: Add docker group for centos user
-     user: name=centos groups=docker append=yes
+   - name: Add docker group for vagrant user
+     user: name=vagrant groups=docker append=yes
 
-   - name: Reload Docker daemon
-     command: systemctl daemon-reload
+   - name: Start and enable Docker
+     service: name=docker state=started enabled=yes
 
-   - name: Restart docker service
-     service: name=docker state=restarted
-
-   - name: Enable Docker Service
-     command: systemctl enable docker
-
-   - name: Install pip
-     yum: name=python-pip state=latest
-
-   - name: Install docker-py
-     pip: name=docker 
-     
+   - name: Build and run webapp containers
+     shell: /vagrant/dockerfiles/webctl.sh deploy

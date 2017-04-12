@@ -1,4 +1,4 @@
-listen_addresses = '{{ ansible_eth0['ipv4']['address'] }}'
+listen_addresses = '{{ ansible_enp0s8['ipv4']['address'] }}'
 port = 5432
 hot_standby = on
 max_connections = 100
