@@ -46,7 +46,7 @@ Checks
 
     Hello World!
     Your IP Address is: 10.10.10.1 
- 10.10.10.1 is your NAT IP, which you are using to connect to virtual machine from your host
+ 10.10.10.1 is your NAT IP, which you are using to connect to virtual machine from your host.
  Scheme of the request: ```Your request -> Haproxy (rewrites http to https) -> Nginx (terminates TLS) -> Tomcat (knows it's being proxied from port 443)```
 
 **Postgres**
