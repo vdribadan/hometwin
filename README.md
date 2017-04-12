@@ -52,32 +52,27 @@ Checks
 **Postgres**
 : Ssh to central instance and try to login to database as user *twino* using password *twino*
 
-    *vagrant ssh central*
-    *sudo -u postgres psql -h 10.10.10.3 -d twino -U twino*
+    vagrant ssh central
+    sudo -u postgres psql -h 10.10.10.3 -d twino -U twino
  
  : Try to list users, databases etc.
  
 
-    *\du*
-    *\l*
+    \du
+    \l
  
  : Create new table:
         
   
 
-    CREATE TABLE COMPANY(
-   ID INT PRIMARY KEY     NOT NULL,
-   NAME           TEXT    NOT NULL,
-   AGE            INT     NOT NULL,
-   ADDRESS        CHAR(50),
-   SALARY         REAL
-);
+    CREATE TABLE COMPANY(ID INT PRIMARY KEY NOT NULL, NAME TEXT NOT NULL, AGE INT NOT NULL, ADDRESS  CHAR(50), SALARY  REAL);
     
  : Login to database on **worker** host to check if our table was replicated there:
  
 
-    *sudo -u postgres psql -h 10.10.10.2 -d twino -U twino*
-    *\d company*
+    vagrant ssh worker
+    sudo -u postgres psql -h 10.10.10.2 -d twino -U twino
+    \d company
 
 : If you're able to see table description, then replication is working.
     
