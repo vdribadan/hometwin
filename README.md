@@ -29,7 +29,7 @@ Result
 On host **central** there will 4 Docker containers running:
 
  1. **Tomcat** server with servlet, which prints your "Hello World" and returns your IP address
- 2. **2 Nginx ** reverse proxies, redirecting traffic to tomcat and terminating TLS
+ 2. **2 Nginx** reverse proxies, redirecting traffic to tomcat and terminating TLS
  3. **Haproxy** loadbalancer, which distributes traffic between nginx proxies
  4. **Postgres** database cluster with streaming replication to worker host
 
@@ -65,13 +65,13 @@ Checks
         
   
 
-    *CREATE TABLE COMPANY(*
-   *ID INT PRIMARY KEY     NOT NULL,*
-   *NAME           TEXT    NOT NULL,*
-   *AGE            INT     NOT NULL,*
-   *ADDRESS        CHAR(50),*
-   *SALARY         REAL*
-*);*
+    CREATE TABLE COMPANY(
+   ID INT PRIMARY KEY     NOT NULL,
+   NAME           TEXT    NOT NULL,
+   AGE            INT     NOT NULL,
+   ADDRESS        CHAR(50),
+   SALARY         REAL
+);
     
  : Login to database on **worker** host to check if our table was replicated there:
  
