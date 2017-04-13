@@ -69,13 +69,13 @@ Checks
 
     CREATE TABLE COMPANY(ID INT PRIMARY KEY NOT NULL, NAME TEXT NOT NULL, AGE INT NOT NULL, ADDRESS  CHAR(50), SALARY  REAL);
     
-  Login to database on **worker** host to check if our table was replicated there:
+  Quit central, login to database on **worker** host with the same user and password as on central to check if our table was replicated there:
  
 
     vagrant ssh worker
     sudo -u postgres psql -h 10.10.10.2 -d twino -U twino
     \d company
 
- If you're able to see table description, then replication is working.
+ If you're able to login as twino and get table description, then replication is working.
     
 Enjoy using this setup at will.
